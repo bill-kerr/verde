@@ -1,10 +1,20 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
 	import { setAuthContext } from '$lib/client/domains/auth/auth-context';
-	import type { User } from '$lib/types/user';
+	import { authStore } from '$lib/client/domains/auth/store';
 
-	export let user: User;
+	$: if ($authStore.user) {
+		setAuthContext({ user: $authStore.user });
+	}
 
-	setAuthContext({ user });
+	$: if (!$authStore.user && $authStore.isInitialized && browser) {
+		goto('/login');
+	}
+
+	$: isAuthed = $authStore.isInitialized && $authStore.user;
 </script>
 
-<slot />
+{#if isAuthed}
+	<slot />
+{/if}

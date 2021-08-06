@@ -16,8 +16,9 @@ const createStore = () => {
 
 	const initialize = () => {
 		initializeFirebase();
-		update((state) => ({ ...state, isInitialized: true }));
-		subscribeToAuthState((user) => update((state) => ({ ...state, user })));
+		subscribeToAuthState((user) => {
+			update((state) => ({ ...state, isInitialized: true, user }));
+		});
 	};
 
 	const login = () => loginWithGoogle();
