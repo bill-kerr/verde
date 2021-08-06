@@ -1,0 +1,13 @@
+<script lang="ts">
+	import { browser } from '$app/env';
+	import { goto } from '$app/navigation';
+	import { authStore } from '$lib/client/domains/auth/store';
+
+	const login = () => authStore.login();
+
+	$: if ($authStore.user && browser) {
+		goto('/');
+	}
+</script>
+
+<button on:click={login} class="p-2 bg-blue-500 text-white rounded">Login</button>
