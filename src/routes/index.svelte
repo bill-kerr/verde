@@ -1,18 +1,13 @@
 <script lang="ts">
-	import { tooltip } from '$lib/client/actions/use-tooltip';
-	import Test from '$lib/client/components/test.svelte';
-	import { getAuthContext } from '$lib/client/domains/auth/auth-context';
 	import { authStore } from '$lib/client/domains/auth/store';
-
-	const { user } = getAuthContext();
-
-	const logout = () => authStore.logout();
 </script>
 
-<h1 use:tooltip={{ content: 'this is a test' }}>Hello world</h1>
-<pre>{JSON.stringify(user, null, 4)}</pre>
-<button class="p-2 bg-blue-500 text-white rounded" on:click={logout}>Logout</button>
+<p>Welcome to Verde!</p>
 
-<Test />
+{#if $authStore.user}
+	<p>You're logged in, bro</p>
+{/if}
 
-<a href="/expenses/add">Add expense</a>
+<div class="flex flex-col">
+	<a href="/dashboard" class="text-blue-700 hover:text-blue-600">Dashboard</a>
+</div>

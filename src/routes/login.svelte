@@ -6,7 +6,7 @@
 	const login = () => authStore.login();
 
 	$: if ($authStore.user && browser) {
-		goto('/');
+		goto('/dashboard');
 	}
 </script>
 
