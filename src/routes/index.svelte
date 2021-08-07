@@ -14,3 +14,5 @@
 <button class="p-2 bg-blue-500 text-white rounded" on:click={logout}>Logout</button>
 
 <Test />
+
+<a href="/expenses/add">Add expense</a>

@@ -3,12 +3,12 @@
 
 	import { useQuery, useQueryClient } from '@sveltestack/svelte-query';
 
-	const result = useQuery<{ message: string }, Error>('/api/diagnostics/healthcheck', verdeApiFetcher);
+	const result = useQuery<{ message: string }, Error>('/api/transaction-schedules', verdeApiFetcher);
 
 	const client = useQueryClient();
 
 	const mutate = () => {
-		client.setQueryData('/api/diagnostics/healthcheck', { message: 'mutated bro' });
+		client.setQueryData('/api/transaction-schedules', { message: 'mutated bro' });
 	};
 </script>
 
