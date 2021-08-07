@@ -12,6 +12,11 @@ const config = {
 		files: {
 			lib: 'src/',
 		},
+		vite: {
+			optimizeDeps: {
+				include: ['broadcast-channel'],
+			},
+		},
 	},
 };
 

@@ -3,7 +3,7 @@ import {
 	loginWithGoogle,
 	logout as firebaseLogout,
 	subscribeToAuthState,
-} from '$lib/client/services/firebase/client';
+} from '$lib/client/clients/firebase';
 import type { User } from '$lib/types/user';
 import { writable } from 'svelte/store';
 

@@ -6,3 +6,24 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+model TransactionSchedule {
+  id          Int                            @id @default(autoincrement())
+  amount      Int
+  description String
+  startDate   DateTime
+  endDate     DateTime?
+  recurrence  String
+  userId      String
+  exceptions  TransactionScheduleException[]
+  createdAt   DateTime                       @default(now())
+  updatedAt   DateTime                       @updatedAt
+}
+
+model TransactionScheduleException {
+  id                    Int                 @id @default(autoincrement())
+  transactionScheduleId Int
+  transactionSchedule   TransactionSchedule @relation(fields: [transactionScheduleId], references: [id])
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+}

@@ -4,6 +4,9 @@
 	import { onMount } from 'svelte';
 	import { authStore } from '$lib/client/domains/auth/store';
 	import AuthenticatedLayout from '$lib/client/domains/auth/components/authenticated-layout.svelte';
+	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+
+	const queryClient = new QueryClient();
 
 	onMount(() => {
 		authStore.initialize();
@@ -11,5 +14,7 @@
 </script>
 
 <AuthenticatedLayout>
-	<slot />
+	<QueryClientProvider client={queryClient}>
+		<slot />
+	</QueryClientProvider>
 </AuthenticatedLayout>
