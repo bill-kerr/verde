@@ -8,16 +8,22 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				instagram: '#E1306C',
 				pinterest: '#E60023',
-				gray: colors.coolGray
-			}
-		}
+				gray: colors.coolGray,
+				emerald: colors.emerald,
+				lime: colors.lime,
+			},
+			spacing: {
+				128: '32rem',
+				172: '43rem',
+			},
+		},
 	},
 	variants: {
-		extend: {}
-	}
+		extend: {},
+	},
 };
