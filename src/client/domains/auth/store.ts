@@ -4,7 +4,7 @@ import {
 	logout as firebaseLogout,
 	subscribeToAuthState,
 } from '$lib/client/clients/firebase';
-import type { User } from '$lib/types/user';
+import type { User } from '$lib/common/types/user';
 import { writable } from 'svelte/store';
 
 export type AuthStoreState = { user: User | null; isInitialized: boolean };

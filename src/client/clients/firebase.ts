@@ -1,4 +1,4 @@
-import type { User } from '$lib/types/user';
+import type { User } from '$lib/common/types/user';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import defaultUserImage from '/images/default-user.png';

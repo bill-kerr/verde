@@ -10,4 +10,14 @@
 	}
 </script>
 
-<button on:click={login} class="p-2 bg-blue-500 text-white rounded">Login</button>
+<button on:click={login} class="p-2 bg-blue-500 text-white rounded bg-red bg-primary">Login</button>
+
+<style>
+	.bg-red {
+		background-color: 'red';
+	}
+
+	.bg-primary {
+		background-color: 'red';
+	}
+</style>

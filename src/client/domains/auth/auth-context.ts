@@ -1,4 +1,4 @@
-import type { User } from '$lib/types/user';
+import type { User } from '$lib/common/types/user';
 import { getContext, setContext } from 'svelte';
 
 export type AuthContext = {
