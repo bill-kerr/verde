@@ -17,6 +17,10 @@
 	const queryClient = new QueryClient();
 </script>
 
+<svelte:head>
+	<script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+</svelte:head>
+
 <QueryClientProvider client={queryClient}>
 	<slot />
 </QueryClientProvider>

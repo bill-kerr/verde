@@ -10,7 +10,9 @@
 		"lint": "prettier --ignore-path .gitignore  --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"db:up": "docker compose up -d",
-		"db:down": "docker compose down"
+		"db:down": "docker compose down",
+		"prisma:format": "npx prisma format",
+		"prisma:generate": "npx prisma generate"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "next",
@@ -23,7 +25,7 @@
 		"postcss": "^8.3.6",
 		"prettier": "~2.2.1",
 		"prettier-plugin-svelte": "^2.2.0",
-		"prisma": "^2.28.0",
+		"prisma": "^2.29.1",
 		"svelte": "^3.34.0",
 		"svelte-check": "^2.0.0",
 		"svelte-preprocess": "^4.0.0",
@@ -33,9 +35,12 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^2.28.0",
+		"@prisma/client": "^2.29.1",
 		"@sveltestack/svelte-query": "^1.4.1",
+		"@types/plaid-link": "^2.0.9",
+		"axios": "^0.21.1",
 		"clsx": "^1.1.1",
+		"date-fns": "^2.23.0",
 		"firebase": "^8.9.0",
 		"tippy.js": "^6.3.1"
 	}
