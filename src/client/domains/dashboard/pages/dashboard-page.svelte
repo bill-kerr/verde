@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 	import { openPlaidLink } from '$lib/client/clients/plaid';
+	import Button from '$lib/client/components/button.svelte';
+	import TransactionCard from '$lib/client/components/transaction-card.svelte';
 	import { getAuthContext } from '$lib/client/domains/auth/auth-context';
 	import type { LinkToken } from '$lib/common/types/link-token';
 	import axios from 'axios';
+	import clsx from 'clsx';
 
 	const { user } = getAuthContext();
 
@@ -30,4 +33,8 @@
 	}
 </script>
 
-<div class="p-4 bg-white rounded-xl border border-gray-100">hello</div>
+<div class="flex items-center space-x-4">
+	<TransactionCard date={new Date()} amount={34563} name="Test" />
+	<TransactionCard date={new Date()} amount={34563} name="Test" />
+	<Button variant="white">hello there</Button>
+</div>
