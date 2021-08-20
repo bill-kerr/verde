@@ -3,16 +3,12 @@
 	import '$lib/client/css/fonts.css';
 	import { onMount } from 'svelte';
 	import { authStore } from '$lib/client/domains/auth/store';
-	import { setAuthContext } from '$lib/client/domains/auth/auth-context';
 	import { QueryClientProvider, QueryClient } from '@sveltestack/svelte-query';
+	import MaxWidthContainer from '$lib/client/domains/dashboard/components/layout/max-width-container.svelte';
 
 	onMount(() => {
 		authStore.initialize();
 	});
-
-	$: if ($authStore.user) {
-		setAuthContext({ user: $authStore.user });
-	}
 
 	const queryClient = new QueryClient();
 </script>
@@ -22,5 +18,7 @@
 </svelte:head>
 
 <QueryClientProvider client={queryClient}>
-	<slot />
+	<MaxWidthContainer>
+		<slot />
+	</MaxWidthContainer>
 </QueryClientProvider>

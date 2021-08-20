@@ -11,11 +11,23 @@
 </script>
 
 <script lang="ts">
-	import Page404 from '$lib/client/pages/404.svelte';
-
 	export let status: number;
+	let message = '';
+
+	$: {
+		switch (status) {
+			case 404:
+				message = "We couldn't find the page you were looking for.";
+				break;
+			case 500:
+			default:
+				message = 'An unknown error occurred.';
+				break;
+		}
+	}
 </script>
 
-{#if status === 404}
-	<Page404 />
-{/if}
+<div class="h-screen flex flex-col items-center justify-center">
+	<h1 class="text-lg font-bold text-green-600">{status}</h1>
+	<span class="text-gray-700">{message}</span>
+</div>

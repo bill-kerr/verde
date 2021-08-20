@@ -12,10 +12,12 @@
 		"db:up": "docker compose up -d",
 		"db:down": "docker compose down",
 		"prisma:format": "npx prisma format",
-		"prisma:generate": "npx prisma generate"
+		"prisma:generate": "npx prisma generate",
+		"prisma:migrate-dev": "npx prisma migrate dev"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "next",
+		"@types/plaid-link": "^2.0.9",
 		"@typescript-eslint/eslint-plugin": "^4.19.0",
 		"@typescript-eslint/parser": "^4.19.0",
 		"autoprefixer": "^10.3.1",
@@ -37,7 +39,6 @@
 	"dependencies": {
 		"@prisma/client": "^2.29.1",
 		"@sveltestack/svelte-query": "^1.4.1",
-		"@types/plaid-link": "^2.0.9",
 		"axios": "^0.21.1",
 		"clsx": "^1.1.1",
 		"date-fns": "^2.23.0",
