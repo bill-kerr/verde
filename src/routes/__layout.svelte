@@ -4,7 +4,6 @@
 	import { onMount } from 'svelte';
 	import { authStore } from '$lib/client/domains/auth/store';
 	import { QueryClientProvider, QueryClient } from '@sveltestack/svelte-query';
-	import MaxWidthContainer from '$lib/client/components/layout/max-width-container.svelte';
 
 	onMount(() => {
 		authStore.initialize();
@@ -18,7 +17,5 @@
 </svelte:head>
 
 <QueryClientProvider client={queryClient}>
-	<MaxWidthContainer>
-		<slot />
-	</MaxWidthContainer>
+	<slot />
 </QueryClientProvider>

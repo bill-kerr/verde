@@ -2,11 +2,11 @@
 	import { browser } from '$app/env';
 	import { openPlaidLink } from '$lib/client/clients/plaid';
 	import Button from '$lib/client/components/button.svelte';
+	import IconLibrary from '$lib/client/components/icons/icon-library.svelte';
 	import TransactionCard from '$lib/client/components/transaction-card.svelte';
 	import { getAuthContext } from '$lib/client/domains/auth/auth-context';
 	import type { LinkToken } from '$lib/common/types/link-token';
 	import axios from 'axios';
-	import clsx from 'clsx';
 
 	const { user } = getAuthContext();
 
@@ -36,5 +36,8 @@
 <div class="flex items-center space-x-4">
 	<TransactionCard date={new Date()} amount={34563} name="Test" />
 	<TransactionCard date={new Date()} amount={34563} name="Test" />
-	<Button variant="white">hello there</Button>
+	<Button variant="blue" size="md" class="flex items-center">
+		<span><IconLibrary class="h-5 w-5" /></span>
+		<span class="ml-1.5">Link Your Bank</span>
+	</Button>
 </div>
