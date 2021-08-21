@@ -7,6 +7,8 @@
 	export let amount: number;
 	export let date: Date;
 	export let name: string;
+
+	$: textColorClasses = amount > 0 ? 'text-green-600' : 'text-gray-900';
 </script>
 
 <div
@@ -25,6 +27,8 @@
 	>
 		{name.charAt(0)}
 	</div>
-	<div class="mt-2 flex justify-center bg-white font-semibold">{formatCurrency(amount)}</div>
+	<div class={clsx('mt-2 flex justify-center bg-white font-semibold', textColorClasses)}>
+		{formatCurrency(amount, { withSign: 'plus' })}
+	</div>
 	<div class="text-xs text-gray-600 uppercase">{format(date, 'MMMM dd')}</div>
 </div>
