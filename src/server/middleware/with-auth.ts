@@ -6,7 +6,7 @@ import type { DefaultOutput } from '$lib/server/types/default-handler';
 
 const extractTokenFromHeader = (headers: Headers) => {
 	const authHeader = headers.authorization;
-	return authHeader.replace('Bearer ', '');
+	return authHeader ? authHeader.replace('Bearer ', '') : '';
 };
 
 export const withAuth = <
@@ -26,11 +26,11 @@ export const withAuth = <
 	const handlerWithAuth: RequestHandler<Locals & { userId: string }, Input, DefaultOutput<Output>> = async (req) => {
 		const token = extractTokenFromHeader(req.headers);
 		try {
-			console.log('token', token);
 			const result = await firebaseAdmin.auth().verifyIdToken(token);
 			req.locals.userId = result.uid;
 			return handler(req);
 		} catch (error) {
+			console.error(error);
 			return rejectUnauthorizedHandler(req);
 		}
 	};
