@@ -2,7 +2,7 @@ import { authStore } from '$lib/client/domains/auth/store';
 import type { QueryKey } from '@sveltestack/svelte-query';
 import { get } from 'svelte/store';
 
-export const verdeAuthenticatedApiFetcher = async ({ queryKey }: { queryKey: QueryKey }) => {
+export const verdeApiFetcher = async ({ queryKey }: { queryKey: QueryKey }) => {
 	const { user } = get(authStore);
 	if (!user) {
 		return;
@@ -15,7 +15,7 @@ export const verdeAuthenticatedApiFetcher = async ({ queryKey }: { queryKey: Que
 	return res.json();
 };
 
-export const verdeApiFetcher = async ({ queryKey }: { queryKey: QueryKey }) => {
+export const verdeUnauthenticatedApiFetcher = async ({ queryKey }: { queryKey: QueryKey }) => {
 	const res = await fetch(queryKey.toString());
 	return res.json();
 };

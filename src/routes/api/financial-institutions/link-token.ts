@@ -1,9 +1,11 @@
 import type { LinkToken } from '$lib/common/types/link-token';
 import type { PlaidCreateTokenResponse } from '$lib/common/types/plaid';
+import { withAuth } from '$lib/server/middleware/with-auth';
+import type { DefaultInput, DefaultOutput } from '$lib/server/types/default-handler';
 import axios from 'axios';
 import { parseISO } from 'date-fns';
 
-export async function get() {
+export const get = withAuth<DefaultInput, DefaultOutput>(async (req) => {
 	try {
 		const { data } = await axios.post<PlaidCreateTokenResponse>(
 			`${import.meta.env.VITE_PLAID_API_BASE_URL}/link/token/create`,
@@ -14,7 +16,7 @@ export async function get() {
 				language: 'en',
 				country_codes: [import.meta.env.VITE_PLAID_COUNTRY_CODES ?? 'US'],
 				user: {
-					client_user_id: '1',
+					client_user_id: req.locals.userId,
 				},
 				products: ['transactions', 'auth'],
 			},
@@ -34,8 +36,8 @@ export async function get() {
 		return {
 			status: 500,
 			body: {
-				message: 'An unknown error occurred while creating a link token',
+				error: 'An unknown error occurred while creating a link token',
 			},
 		};
 	}
-}
+});
