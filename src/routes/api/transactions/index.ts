@@ -1,10 +1,9 @@
 import { plaidAxiosClient } from '$lib/server/clients/plaid';
 import { prisma } from '$lib/server/clients/prisma';
 import { withAuth } from '$lib/server/middleware/with-auth';
-import type { DefaultInput, DefaultOutput } from '$lib/server/types/default-handler';
 
-export const get = withAuth<DefaultInput, DefaultOutput>(async (req) => {
-	const institution = await prisma.financialInstitution.findFirst({ where: { userId: req.locals.userId } });
+export const get = withAuth(async (req) => {
+	const institution = await prisma.userInstitution.findFirst({ where: { userId: req.locals.userId } });
 
 	if (!institution) {
 		return {

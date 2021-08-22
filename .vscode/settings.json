@@ -1,4 +1,16 @@
 {
-	"cSpell.words": ["clsx", "clsy", "focusable", "klass", "sswr", "sveltejs", "sveltestack", "tailwindcss", "vite"],
+	"cSpell.words": [
+		"RECAPTCHA",
+		"clsx",
+		"clsy",
+		"focusable",
+		"klass",
+		"sswr",
+		"sveltejs",
+		"sveltestack",
+		"tailwindcss",
+		"upsert",
+		"vite"
+	],
 	"typescript.preferences.importModuleSpecifier": "non-relative"
 }

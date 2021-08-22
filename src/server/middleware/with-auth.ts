@@ -2,7 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import type { Headers } from '@sveltejs/kit/types/helper';
 import type { DefaultBody } from '@sveltejs/kit/types/endpoint';
 import firebaseAdmin from '$lib/server/clients/firebase/client';
-import type { DefaultOutput } from '$lib/server/types/default-handler';
+import type { DefaultOutput, DefaultInput, DefaultLocals } from '$lib/server/types/default-handler';
 
 const extractTokenFromHeader = (headers: Headers) => {
 	const authHeader = headers.authorization;
@@ -10,9 +10,9 @@ const extractTokenFromHeader = (headers: Headers) => {
 };
 
 export const withAuth = <
-	Input = unknown,
+	Input = DefaultInput,
 	Output extends DefaultBody = DefaultBody,
-	Locals = Record<string, unknown> & { userId: string }
+	Locals = DefaultLocals & { userId: string }
 >(
 	handler: RequestHandler<Locals, Input, Output>,
 ): RequestHandler<Locals & { userId: string }, Input, DefaultOutput<Output>> => {

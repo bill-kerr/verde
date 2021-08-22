@@ -5,16 +5,13 @@
 	import Button from '$lib/client/components/button.svelte';
 	import IconLibrary from '$lib/client/components/icons/icon-library.svelte';
 	import TransactionCard from '$lib/client/components/transaction-card.svelte';
-	import { getAuthContext } from '$lib/client/domains/auth/auth-context';
 	import type { LinkToken } from '$lib/common/types/link-token';
-
-	const { user } = getAuthContext();
 
 	async function link() {
 		if (!browser) return;
 
 		try {
-			const response = await verdeAxiosClient.get<LinkToken>('/api/financial-institutions/link-token');
+			const response = await verdeAxiosClient.get<LinkToken>('/api/user-institutions/link-token');
 			openPlaidLink(response.data.token, {
 				async onSuccess(token) {
 					await createNewFinancialInstitution(token);
@@ -29,7 +26,8 @@
 	}
 
 	async function createNewFinancialInstitution(publicToken: string) {
-		const response = await verdeAxiosClient.post('/api/financial-institutions', { publicToken });
+		const response = await verdeAxiosClient.post('/api/user-institutions', { publicToken });
+		console.log(response.data);
 	}
 </script>
 
