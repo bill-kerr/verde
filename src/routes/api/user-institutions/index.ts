@@ -7,10 +7,9 @@ import { plaidAxiosClient } from '$lib/server/clients/plaid';
 import { prisma } from '$lib/server/clients/prisma';
 import { createUserInstitutionSchema } from '$lib/server/endpoints/user-institutions/create-user-institution-schema';
 import { withAuth } from '$lib/server/middleware/with-auth';
-import type { DefaultOutput } from '$lib/server/types/default-handler';
 import { apiErrorResponse, apiSuccessResponse } from '$lib/server/utils/api-response';
 
-export const post = withAuth<{ publicToken: string }, DefaultOutput>(async (req) => {
+export const post = withAuth<{ publicToken: string }>(async (req) => {
 	if (!createUserInstitutionSchema.isValidSync(req.body)) {
 		return apiErrorResponse('A valid createUserInstitutionSchema must be provided', 400);
 	}

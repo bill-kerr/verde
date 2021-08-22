@@ -1,17 +1,13 @@
 import { plaidAxiosClient } from '$lib/server/clients/plaid';
 import { prisma } from '$lib/server/clients/prisma';
 import { withAuth } from '$lib/server/middleware/with-auth';
+import { apiErrorResponse, apiSuccessResponse } from '$lib/server/utils/api-response';
 
 export const get = withAuth(async (req) => {
 	const institution = await prisma.userInstitution.findFirst({ where: { userId: req.locals.userId } });
 
 	if (!institution) {
-		return {
-			status: 400,
-			body: {
-				error: 'Could not find an associated financial institution',
-			},
-		};
+		return apiErrorResponse('Could not find an associated financial institution', 400);
 	}
 
 	const response = await plaidAxiosClient.post('/transactions/get', {
@@ -23,8 +19,5 @@ export const get = withAuth(async (req) => {
 		},
 	});
 
-	return {
-		status: 200,
-		body: response.data,
-	};
+	return apiSuccessResponse(response.data);
 });
