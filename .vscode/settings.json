@@ -10,6 +10,7 @@
 		"sveltestack",
 		"tailwindcss",
 		"upsert",
+		"vercel",
 		"vite"
 	],
 	"typescript.preferences.importModuleSpecifier": "non-relative"
