@@ -1,4 +1,4 @@
-export function apiErrorResponse(error: string, status = 500) {
+export function errorResponse(error: string, status = 500) {
 	return {
 		status,
 		body: {
@@ -7,7 +7,7 @@ export function apiErrorResponse(error: string, status = 500) {
 	};
 }
 
-export function apiSuccessResponse<T>(body: T, status = 200) {
+export function successResponse<T>(body: T, status = 200) {
 	return {
 		status,
 		body,

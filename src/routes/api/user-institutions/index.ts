@@ -7,11 +7,19 @@ import { plaidAxiosClient } from '$lib/server/clients/plaid';
 import { prisma } from '$lib/server/clients/prisma';
 import { createUserInstitutionSchema } from '$lib/server/endpoints/user-institutions/create-user-institution-schema';
 import { withAuth } from '$lib/server/middleware/with-auth';
-import { apiErrorResponse, apiSuccessResponse } from '$lib/server/utils/api-response';
+import { errorResponse, successResponse } from '$lib/server/utils/api-response';
+
+export const get = withAuth(async (req) => {
+	const userInstitutions = await prisma.userInstitution.findMany({
+		where: { userId: req.locals.userId },
+		include: { institution: true },
+	});
+	return successResponse(userInstitutions);
+});
 
 export const post = withAuth<{ publicToken: string }>(async (req) => {
 	if (!createUserInstitutionSchema.isValidSync(req.body)) {
-		return apiErrorResponse('A valid createUserInstitutionSchema must be provided', 400);
+		return errorResponse('A valid createUserInstitutionSchema must be provided', 400);
 	}
 
 	try {
@@ -63,13 +71,13 @@ export const post = withAuth<{ publicToken: string }>(async (req) => {
 
 		// TODO: do an initial fetch of transactions
 
-		return apiSuccessResponse({
+		return successResponse({
 			institution,
 			userInstitution,
 		});
 	} catch (error) {
 		console.error(error);
-		return apiErrorResponse(
+		return errorResponse(
 			'An unknown error occurred while exchanging tokens, fetching institution data, or writing to the database',
 		);
 	}

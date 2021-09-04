@@ -1,7 +1,6 @@
 import type { User } from '$lib/common/types/user';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import defaultUserImage from '/images/default-user.png';
+import firebase from 'firebase';
+import '@firebase/auth';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBXJDPXnqglNtueataSNFOvMMrTDUoihcI',
@@ -49,7 +48,7 @@ const mapFirebaseUser = (firebaseUser: firebase.User | null, accessToken: string
 		id: firebaseUser.uid,
 		email: firebaseUser.email || '',
 		emailVerified: firebaseUser.emailVerified,
-		photoUrl: firebaseUser.photoURL || defaultUserImage,
+		photoUrl: firebaseUser.photoURL || '/images/default-user.png',
 		refreshToken: firebaseUser.refreshToken,
 		displayName: firebaseUser.displayName || firebaseUser.email || '',
 		accessToken,

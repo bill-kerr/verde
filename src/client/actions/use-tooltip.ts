@@ -7,10 +7,7 @@ export type UseTooltipProps = {
 	class?: string;
 };
 
-export const tooltip = (
-	el: Element,
-	{ content, class: klass }: UseTooltipProps
-): { destroy: () => void } => {
+export const tooltip = (el: Element, { content, class: klass }: UseTooltipProps): { destroy: () => void } => {
 	const props: Partial<TippyProps> = {
 		allowHTML: false,
 		content,
@@ -35,9 +32,9 @@ export const tooltip = (
 
 			return {
 				popper,
-				onUpdate
+				onUpdate,
 			};
-		}
+		},
 	};
 
 	const tippyInstance = tippy(el, props);
@@ -45,6 +42,6 @@ export const tooltip = (
 	return {
 		destroy() {
 			tippyInstance.destroy();
-		}
+		},
 	};
 };

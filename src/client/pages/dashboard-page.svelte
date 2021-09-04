@@ -31,10 +31,13 @@
 	}
 </script>
 
-<div class="flex items-center space-x-4">
-	<TransactionCard date={new Date()} amount={34563} name="Test" />
-	<TransactionCard date={new Date()} amount={34563} name="Test" />
-	<Button variant="blue" size="md" class="flex items-center">
+<div>
+	<h3 class="text-sm font-bold text-gray-600">Recent transactions</h3>
+	<div class="mt-2 flex items-center space-x-4">
+		<TransactionCard date={new Date()} amount={34563} name="Test" />
+		<TransactionCard date={new Date()} amount={34563} name="Test" />
+	</div>
+	<Button variant="blue" size="md" class="mt-12 flex items-center">
 		<span><IconLibrary class="h-5 w-5" /></span>
 		<span class="ml-1.5" on:click={link}>Link An Account</span>
 	</Button>

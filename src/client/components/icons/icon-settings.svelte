@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { IconType } from '$lib/client/types/icon';
-	import es from 'date-fns/locale/es';
 
 	let klass = '';
 	export { klass as class };

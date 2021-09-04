@@ -5,3 +5,4 @@ node_modules
 /package
 .env
 firebase-credentials.json
+.vercel_build_output

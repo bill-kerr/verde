@@ -2,7 +2,7 @@
 	import { tooltip } from '$lib/client/actions/use-tooltip';
 	import { formatCurrency } from '$lib/client/utils/currency';
 	import clsx from 'clsx';
-	import format from 'date-fns/format';
+	import { format } from 'date-fns';
 
 	export let amount: number;
 	export let date: Date;
@@ -14,7 +14,7 @@
 <div
 	class={clsx(
 		'relative h-36 w-36 p-4 flex flex-col justify-between items-center',
-		'rounded-xl overflow-hidden shadow bg-white',
+		'rounded-xl overflow-hidden bg-white border border-gray-200',
 	)}
 >
 	<div
