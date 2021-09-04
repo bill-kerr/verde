@@ -3,7 +3,7 @@ import type { Headers } from '@sveltejs/kit/types/helper';
 import type { DefaultBody } from '@sveltejs/kit/types/endpoint';
 import firebaseAdmin from '$lib/server/clients/firebase/client';
 import type { DefaultOutput, DefaultInput, DefaultLocals } from '$lib/server/types/default-handler';
-import { apiErrorResponse } from '$lib/server/utils/api-response';
+import { errorResponse } from '$lib/server/utils/api-response';
 
 const extractTokenFromHeader = (headers: Headers) => {
 	const authHeader = headers.authorization;
@@ -18,7 +18,7 @@ export const withAuth = <
 	handler: RequestHandler<Locals & { userId: string }, Input, DefaultOutput<Output>>,
 ): RequestHandler<Locals & { userId: string }, Input, DefaultOutput<Output>> => {
 	const rejectUnauthorizedHandler: RequestHandler<Locals, Input, DefaultOutput<Output>> = () =>
-		apiErrorResponse('You are not authorized to access this endpoint', 403);
+		errorResponse('You are not authorized to access this endpoint', 403);
 
 	const handlerWithAuth: RequestHandler<Locals & { userId: string }, Input, DefaultOutput<Output>> = async (req) => {
 		const token = extractTokenFromHeader(req.headers);

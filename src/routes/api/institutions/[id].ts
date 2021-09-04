@@ -8,7 +8,7 @@ export const get = withAuth(async (req) => {
 	const institution = await prisma.institution.findUnique({ where: { id } });
 
 	if (!institution) {
-		return errorResponse(`Could not find an institution with an id of ${req.params.id}`);
+		return errorResponse(`Could not find an institution with an id of ${req.params.id}`, 400);
 	}
 
 	return successResponse(institution);

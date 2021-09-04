@@ -5,13 +5,16 @@
 	import Button from '$lib/client/components/button.svelte';
 	import IconLibrary from '$lib/client/components/icons/icon-library.svelte';
 	import TransactionCard from '$lib/client/components/transaction-card.svelte';
+	import { useTransactions } from '$lib/client/hooks/use-transactions';
 	import type { LinkToken } from '$lib/common/types/link-token';
+
+	const result = useTransactions();
 
 	async function link() {
 		if (!browser) return;
 
 		try {
-			const response = await verdeAxiosClient.get<LinkToken>('/api/user-institutions/link-token');
+			const response = await verdeAxiosClient.get<LinkToken>('/user-institutions/link-token');
 			openPlaidLink(response.data.token, {
 				async onSuccess(token) {
 					await createNewFinancialInstitution(token);
@@ -26,11 +29,12 @@
 	}
 
 	async function createNewFinancialInstitution(publicToken: string) {
-		const response = await verdeAxiosClient.post('/api/user-institutions', { publicToken });
+		const response = await verdeAxiosClient.post('/user-institutions', { publicToken });
 		console.log(response.data);
 	}
 </script>
 
+<p>{$result.data}</p>
 <div>
 	<h3 class="text-sm font-bold text-gray-600">Recent transactions</h3>
 	<div class="mt-2 flex items-center space-x-4">

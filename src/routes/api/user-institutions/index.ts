@@ -69,6 +69,7 @@ export const post = withAuth<{ publicToken: string }>(async (req) => {
 			},
 		});
 
+		// TODO: do an initial fetch of accounts
 		// TODO: do an initial fetch of transactions
 
 		return successResponse({

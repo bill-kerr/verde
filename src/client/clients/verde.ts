@@ -8,12 +8,12 @@ export const verdeApiFetcher = async ({ queryKey }: { queryKey: QueryKey }) => {
 	if (!user) {
 		return;
 	}
-	const res = await fetch(queryKey.toString(), {
+	const res = await verdeAxiosClient.get(queryKey.toString(), {
 		headers: {
 			Authorization: `Bearer ${user.accessToken}`,
 		},
 	});
-	return res.json();
+	return res.data;
 };
 
 export const verdeUnauthenticatedApiFetcher = async ({ queryKey }: { queryKey: QueryKey }) => {
@@ -23,6 +23,7 @@ export const verdeUnauthenticatedApiFetcher = async ({ queryKey }: { queryKey: Q
 
 export const verdeAxiosClient = axios.create({
 	responseType: 'json',
+	baseURL: '/api',
 });
 
 verdeAxiosClient.interceptors.request.use(async (request) => {

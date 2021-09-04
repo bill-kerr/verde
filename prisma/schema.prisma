@@ -7,6 +7,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum UserAccountType {
+  Investment
+  Credit
+  Loan
+  Depository
+  Brokerage
+  Other
+}
+
 model Institution {
   id                 Int               @id @default(autoincrement())
   plaidInstitutionId String            @unique
@@ -20,12 +29,27 @@ model Institution {
 }
 
 model UserInstitution {
-  id               Int         @id @default(autoincrement())
+  id               Int           @id @default(autoincrement())
   institutionId    Int
-  institution      Institution @relation(fields: [institutionId], references: [id])
+  institution      Institution   @relation(fields: [institutionId], references: [id])
   userId           String
   plaidAccessToken String
   plaidItemId      String
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  userAccounts     UserAccount[]
+}
+
+model UserAccount {
+  id                Int             @id @default(autoincrement())
+  userId            String
+  name              String
+  mask              String?
+  plaidAccountId    String          @unique
+  type              UserAccountType
+  subtype           String?
+  userInstitutionId Int
+  userInstitution   UserInstitution @relation(fields: [userInstitutionId], references: [id])
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
 }
