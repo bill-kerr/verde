@@ -16,6 +16,12 @@ enum UserAccountType {
   Other
 }
 
+enum PaymentChannel {
+  InStore
+  Online
+  Other
+}
+
 model Institution {
   id                 Int               @id @default(autoincrement())
   plaidInstitutionId String            @unique
@@ -50,6 +56,24 @@ model UserAccount {
   subtype           String?
   userInstitutionId Int
   userInstitution   UserInstitution @relation(fields: [userInstitutionId], references: [id])
+  transactions      Transaction[]
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
+}
+
+model Transaction {
+  id                 Int            @id @default(autoincrement())
+  userId             String
+  plaidTransactionId String         @unique
+  merchantName       String?
+  name               String
+  amount             Int
+  date               DateTime
+  isPending          Boolean
+  paymentChannel     PaymentChannel
+  userAccountId      Int
+  category           String[]
+  userAccount        UserAccount    @relation(fields: [userAccountId], references: [id])
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
 }

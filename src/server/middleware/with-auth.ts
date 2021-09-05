@@ -1,7 +1,7 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Headers } from '@sveltejs/kit/types/helper';
 import type { DefaultBody } from '@sveltejs/kit/types/endpoint';
-import firebaseAdmin from '$lib/server/clients/firebase/client';
+import { verifyToken } from '$lib/server/clients/firebase/client';
 import type { DefaultOutput, DefaultInput, DefaultLocals } from '$lib/server/types/default-handler';
 import { errorResponse } from '$lib/server/utils/api-response';
 
@@ -23,8 +23,8 @@ export const withAuth = <
 	const handlerWithAuth: RequestHandler<Locals & { userId: string }, Input, DefaultOutput<Output>> = async (req) => {
 		const token = extractTokenFromHeader(req.headers);
 		try {
-			const result = await firebaseAdmin.auth().verifyIdToken(token);
-			req.locals.userId = result.uid;
+			const userId = await verifyToken(token);
+			req.locals.userId = userId;
 			return handler(req);
 		} catch (error) {
 			console.error(error);

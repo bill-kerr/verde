@@ -1,5 +1,5 @@
 import type { User } from '$lib/common/types/user';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import '@firebase/auth';
 
 const firebaseConfig = {

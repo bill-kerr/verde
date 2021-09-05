@@ -20,6 +20,18 @@
 				loading = false;
 			});
 	}
+
+	function handleSyncTransactions() {
+		loading = true;
+		verdeAxiosClient
+			.get('/transactions/sync')
+			.then(() => {
+				loading = false;
+			})
+			.catch(() => {
+				loading = false;
+			});
+	}
 </script>
 
 <button class="p-2 rounded bg-blue-600 text-white" on:click={handleSyncUserAccounts}>
@@ -27,6 +39,14 @@
 		Syncing...
 	{:else}
 		Click here to sync user accounts
+	{/if}
+</button>
+
+<button class="p-2 rounded bg-blue-600 text-white" on:click={handleSyncTransactions}>
+	{#if loading}
+		Syncing...
+	{:else}
+		Click here to sync transactions
 	{/if}
 </button>
 

@@ -8,4 +8,7 @@ if (!admin.apps.length) {
 	admin.initializeApp({ credential: admin.credential.applicationDefault() });
 }
 
-export default admin;
+export async function verifyToken(token: string): Promise<string> {
+	const decodedToken = await admin.auth().verifyIdToken(token);
+	return decodedToken.uid;
+}

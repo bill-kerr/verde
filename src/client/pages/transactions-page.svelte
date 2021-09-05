@@ -7,7 +7,7 @@
 <div>transactions page</div>
 {#if $result.data}
 	<h3>Total transactions:</h3>
-	<div>{$result.data.totalTransactions}</div>
+	<div>{$result.data.length}</div>
 {/if}
 {#if $result.isFetching}
 	<div>fetching</div>

@@ -3,5 +3,5 @@ import type { VerdeGetTransactionsResponse } from '$lib/common/types/verde-api';
 import { useQuery } from '@sveltestack/svelte-query';
 
 export function useTransactions() {
-	return useQuery<VerdeGetTransactionsResponse>('/transactions', verdeApiFetcher, { staleTime: 60000 });
+	return useQuery<VerdeGetTransactionsResponse>('/transactions', verdeApiFetcher);
 }

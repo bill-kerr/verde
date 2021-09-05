@@ -1,5 +1,3 @@
-export type VerdeGetTransactionsResponse = {
-	totalTransactions: number;
-	transactions: unknown[];
-	accounts: unknown[];
-};
+import type { Transaction } from '@prisma/client';
+
+export type VerdeGetTransactionsResponse = Transaction[];
