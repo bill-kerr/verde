@@ -1,68 +1,68 @@
 <script lang="ts">
 	import { verdeAxiosClient } from '$lib/client/clients/verde';
-
-	import { useTransactions } from '$lib/client/hooks/use-transactions';
+	import Card from '$lib/client/components/card.svelte';
+	import SectionTitle from '$lib/client/components/section-title.svelte';
+	import Button from '$lib/client/components/button.svelte';
 	import { useUserAccounts } from '$lib/client/hooks/use-user-accounts';
 	import { useUserInstitutions } from '$lib/client/hooks/use-user-institutions';
+	import clsx from 'clsx';
 
 	const userInstitutionResult = useUserInstitutions();
 	const userAccountsResult = useUserAccounts();
 
-	let loading = false;
+	let isSyncingAccounts = false;
 	function handleSyncUserAccounts() {
-		loading = true;
+		isSyncingAccounts = true;
 		verdeAxiosClient
 			.get('/user-accounts/sync')
 			.then(() => {
-				loading = false;
+				isSyncingAccounts = false;
 			})
 			.catch(() => {
-				loading = false;
+				isSyncingAccounts = false;
 			});
 	}
 
 	function handleSyncTransactions() {
-		loading = true;
 		verdeAxiosClient
 			.get('/transactions/sync')
-			.then(() => {
-				loading = false;
-			})
-			.catch(() => {
-				loading = false;
-			});
+			.then(() => {})
+			.catch(() => {});
 	}
 </script>
 
-<button class="p-2 rounded bg-blue-600 text-white" on:click={handleSyncUserAccounts}>
-	{#if loading}
-		Syncing...
-	{:else}
-		Click here to sync user accounts
-	{/if}
-</button>
+<Card class="flex items-center justify-between">
+	<div>
+		<h3 class="font-bold">Synchronize Accounts</h3>
+		<p class="text-gray-600">Synchronizing your accounts will keep your information up to date.</p>
+	</div>
+	<Button class="relative" on:click={handleSyncUserAccounts} isLoading={true}>Synchronize Accounts</Button>
+</Card>
 
-<button class="p-2 rounded bg-blue-600 text-white" on:click={handleSyncTransactions}>
-	{#if loading}
-		Syncing...
-	{:else}
-		Click here to sync transactions
-	{/if}
-</button>
-
-<h2>Linked Institutions</h2>
-{#if $userInstitutionResult.data}
+{#if $userInstitutionResult.data && $userAccountsResult.data}
 	<ul class="mt-2 space-y-2">
 		{#each $userInstitutionResult.data as { institution }}
-			<li class="flex items-center">
-				<span class="p-1 flex items-center justify-center bg-white border border-gray-200 rounded-xl">
-					<img class="h-10 w-10" src={`data:image/png;base64,${institution.logo}`} alt={institution.name} />
-				</span>
-				<span class="ml-2 font-bold">{institution.name}</span>
+			<li>
+				<Card class="inline-block">
+					<SectionTitle as="h3">Institution</SectionTitle>
+					<div class="flex items-center">
+						<img class="h-10 w-10" src={`data:image/png;base64,${institution.logo}`} alt={institution.name} />
+						<span class="ml-2 font-bold">{institution.name}</span>
+					</div>
+					<div class="mt-4">
+						<SectionTitle as="h3">Linked Accounts</SectionTitle>
+						{#each $userAccountsResult.data.filter((account) => account.userInstitutionId === institution.id) as userAccount}
+							<div>
+								<span>{userAccount.name}</span>
+								<span class="ml-1 text-gray-400 text-sm font-bold">{userAccount.mask}</span>
+							</div>
+							<div class="text-sm italic capitalize">
+								{userAccount.subtype ?? userAccount.type}
+							</div>
+						{/each}
+					</div>
+				</Card>
 			</li>
 		{/each}
 	</ul>
-{/if}
-{#if $userAccountsResult.data}
-	{JSON.stringify($userAccountsResult.data, null, 4)}
 {/if}

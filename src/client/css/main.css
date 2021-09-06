@@ -13,4 +13,12 @@ div[data-tippy-root][data-popper-placement^='top'] .tippy-arrow {
 	@apply -bottom-1 border-b-gray-900 border-r-gray-900;
 }
 
+.icon-outline {
+	@apply h-6 w-6;
+}
+
+.icon-solid {
+	@apply h-5 w-5;
+}
+
 @tailwind utilities;
