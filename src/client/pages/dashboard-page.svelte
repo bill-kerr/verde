@@ -31,6 +31,7 @@
 	<div class="mt-2 flex items-center space-x-4">
 		<TransactionCard date={new Date()} amount={34563} name="Test" />
 		<TransactionCard date={new Date()} amount={34563} name="Test" />
+		<p class="font-hand text-xl text-gray-700">This is a test</p>
 	</div>
 	<Button variant="blue" size="md" class="mt-12 flex items-center">
 		<span><IconLibrary class="h-5 w-5" /></span>

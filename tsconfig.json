@@ -23,6 +23,8 @@
 		"allowJs": true,
 		"checkJs": true,
 		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitAny": true,
 		"paths": {
 			"lib": ["src"],
 			"$lib/*": ["src/*"]

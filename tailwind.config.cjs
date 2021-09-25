@@ -8,7 +8,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+				sans: ['Open Sans', ...defaultTheme.fontFamily.sans],
+				hand: ['Gochi Hand', ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				instagram: '#E1306C',
@@ -16,6 +17,7 @@ module.exports = {
 				gray: colors.coolGray,
 				emerald: colors.emerald,
 				lime: colors.lime,
+				blue: colors.sky,
 			},
 			spacing: {
 				128: '32rem',

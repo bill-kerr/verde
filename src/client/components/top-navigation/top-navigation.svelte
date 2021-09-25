@@ -18,13 +18,16 @@
 	};
 </script>
 
-<nav class="flex justify-end space-x-4 text-sm font-medium">
-	<NavItem href="/dashboard" isActive={getActiveItem() === 'Dashboard'} icon={IconHome} text="Dashboard" />
-	<NavItem
-		href="/dashboard/transactions"
-		isActive={getActiveItem() === 'Transactions'}
-		icon={IconSwitchHorizontal}
-		text="Transactions"
-	/>
-	<NavItem href="/dashboard/settings" isActive={getActiveItem() === 'Settings'} icon={IconSettings} text="Settings" />
-</nav>
+<div class="flex justify-between items-center">
+	<h1 class="font-hand text-5xl text-green-300 font-medium">Verde</h1>
+	<nav class="flex justify-end space-x-4 text-sm font-medium">
+		<NavItem href="/dashboard" isActive={getActiveItem() === 'Dashboard'} icon={IconHome} text="Dashboard" />
+		<NavItem
+			href="/dashboard/transactions"
+			isActive={getActiveItem() === 'Transactions'}
+			icon={IconSwitchHorizontal}
+			text="Transactions"
+		/>
+		<NavItem href="/dashboard/settings" isActive={getActiveItem() === 'Settings'} icon={IconSettings} text="Settings" />
+	</nav>
+</div>
