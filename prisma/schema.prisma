@@ -55,6 +55,7 @@ model UserAccount {
   type              UserAccountType
   subtype           String?
   userInstitutionId Int
+  currentBalance    Int             @default(0)
   userInstitution   UserInstitution @relation(fields: [userInstitutionId], references: [id])
   transactions      Transaction[]
   createdAt         DateTime        @default(now())
@@ -76,4 +77,27 @@ model Transaction {
   userAccount        UserAccount    @relation(fields: [userAccountId], references: [id])
   createdAt          DateTime       @default(now())
   updatedAt          DateTime       @updatedAt
+}
+
+model TransactionSchedule {
+  id                    Int                    @id @default(autoincrement())
+  userId                String
+  description           String
+  amount                Int
+  startDate             DateTime               @default(now())
+  endDate               DateTime?
+  recurrenceRule        String
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  transactionExceptions TransactionException[]
+}
+
+model TransactionException {
+  id                    Int                 @id @default(autoincrement())
+  isDeleted             Boolean             @default(false)
+  originalDate          DateTime
+  newDate               DateTime?
+  amount                Int?
+  transactionScheduleId Int
+  transactionSchedule   TransactionSchedule @relation(fields: [transactionScheduleId], references: [id])
 }

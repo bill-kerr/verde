@@ -22,17 +22,17 @@ if (typeof window !== 'undefined') {
 		const last = focusable[focusable.length - 1];
 		if (isNext(event) && event.target === last) {
 			event.preventDefault();
-			first.focus();
+			first?.focus();
 		} else if (isPrevious(event) && event.target === first) {
 			event.preventDefault();
-			last.focus();
+			last?.focus();
 		}
 	};
 
 	document.addEventListener('keydown', trapFocusListener);
 }
 
-export const trapFocus = (node: HTMLElement) => {
+export const focusTrap = (node: HTMLElement) => {
 	trapFocusList.push(node);
 	return {
 		destroy() {

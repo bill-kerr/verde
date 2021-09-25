@@ -1,4 +1,4 @@
-export function errorResponse(error: string, status = 500) {
+export function errorResponse(error = 'An unknown error occurred', status = 500) {
 	return {
 		status,
 		body: {

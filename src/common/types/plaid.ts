@@ -282,3 +282,5 @@ export type PlaidGetAccountsResponse = {
 	item: PlaidItemMetadata;
 	request_id: string;
 };
+
+export type PlaidGetAccountBalancesResponse = PlaidGetAccountsResponse;

@@ -49,7 +49,7 @@
 								<h3 class="text-xs uppercase text-gray-300 font-bold">Linked Accounts</h3>
 								<div class="mt-2 flex items-center flex-wrap gap-3">
 									{#each $userAccountsResult.data.filter((account) => account.userInstitutionId === institution.id) as userAccount}
-										<div class="p-2 border border-gray-500 rounded-xl">
+										<div class="py-3 px-4 border border-gray-500 rounded-xl">
 											<div>
 												<span class="font-bold">{userAccount.name}</span>
 												<span class="ml-1 text-gray-400 text-sm font-bold">{userAccount.mask}</span>

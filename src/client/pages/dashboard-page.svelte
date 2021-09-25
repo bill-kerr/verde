@@ -4,8 +4,14 @@
 	import { verdeAxiosClient } from '$lib/client/clients/verde';
 	import Button from '$lib/client/components/button.svelte';
 	import IconLibrary from '$lib/client/components/icons/icon-library.svelte';
+	import Modal from '$lib/client/components/modal.svelte';
 	import TransactionCard from '$lib/client/components/transaction-card.svelte';
+	import { useAccountBalance } from '$lib/client/hooks/use-account-balance';
+	import { useUserAccounts } from '$lib/client/hooks/use-user-accounts';
 	import type { LinkToken } from '$lib/common/types/link-token';
+
+	const userAccountsResult = useUserAccounts();
+	const balanceResult = useAccountBalance($userAccountsResult.data?.[0]?.id);
 
 	async function linkFinancialInstitution() {
 		if (!browser) return;
@@ -24,17 +30,31 @@
 			console.log(error);
 		}
 	}
+
+	let isModalOpen = false;
+	function openModal() {
+		isModalOpen = true;
+	}
+	function closeModal() {
+		isModalOpen = false;
+	}
 </script>
 
 <div>
+	<h3>Your account balance</h3>
+	<p>{$balanceResult.data?.currentBalance}</p>
 	<h3 class="text-sm font-bold text-gray-600">Recent transactions</h3>
 	<div class="mt-2 flex items-center space-x-4">
 		<TransactionCard date={new Date()} amount={34563} name="Test" />
 		<TransactionCard date={new Date()} amount={34563} name="Test" />
 		<p class="font-hand text-xl text-gray-700">This is a test</p>
 	</div>
-	<Button variant="blue" size="md" class="mt-12 flex items-center">
-		<span><IconLibrary class="h-5 w-5" /></span>
-		<span class="ml-1.5" on:click={linkFinancialInstitution}>Link An Account</span>
+	<Button class="mt-12 flex items-center" on:click={linkFinancialInstitution}>
+		<IconLibrary slot="icon" class="h-5 w-5" />
+		<span class="ml-1">Link an Account</span>
 	</Button>
+	<Button on:click={openModal}>Open Modal</Button>
+	<div class="relative">
+		<Modal isOpen={isModalOpen} on:close={closeModal} />
+	</div>
 </div>

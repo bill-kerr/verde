@@ -10,7 +10,7 @@
 	export { klass as class };
 
 	let isSyncingAccounts = false;
-	function handleSyncUserAccounts() {
+	function syncUserAccounts() {
 		isSyncingAccounts = true;
 		verdeAxiosClient
 			.get('/user-accounts/sync')
@@ -19,12 +19,21 @@
 	}
 
 	let isSyncingTransactions = false;
-	function handleSyncTransactions() {
+	function syncTransactions() {
 		isSyncingTransactions = true;
 		verdeAxiosClient
 			.get('/transactions/sync')
 			.then(() => (isSyncingTransactions = false))
 			.catch(() => (isSyncingTransactions = false));
+	}
+
+	let isSyncingBalance = false;
+	function syncBalance() {
+		isSyncingBalance = true;
+		verdeAxiosClient
+			.get(`/user-accounts/3/balance`)
+			.then(() => (isSyncingBalance = false))
+			.catch(() => (isSyncingBalance = false));
 	}
 </script>
 
@@ -36,7 +45,7 @@
 		isLoading={isSyncingAccounts}
 		loadingText="Syncing"
 		buttonClass="border-blue-400"
-		on:click={handleSyncUserAccounts}
+		on:click={syncUserAccounts}
 	>
 		<IconSwitchVertical slot="icon" class="h-5 w-5 mr-2" />
 	</SettingsAction>
@@ -47,7 +56,7 @@
 		isLoading={isSyncingTransactions}
 		loadingText="Fetching"
 		buttonClass="border-blue-400"
-		on:click={handleSyncTransactions}
+		on:click={syncTransactions}
 	>
 		<IconCloudDownload slot="icon" class="h-5 w-5 mr-2" />
 	</SettingsAction>
