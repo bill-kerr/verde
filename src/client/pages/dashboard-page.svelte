@@ -49,12 +49,40 @@
 		<TransactionCard date={new Date()} amount={34563} name="Test" />
 		<p class="font-hand text-xl text-gray-700">This is a test</p>
 	</div>
+	<Button on:click={openModal}>Open Modal</Button>
 	<Button class="mt-12 flex items-center" on:click={linkFinancialInstitution}>
 		<IconLibrary slot="icon" class="h-5 w-5" />
 		<span class="ml-1">Link an Account</span>
 	</Button>
-	<Button on:click={openModal}>Open Modal</Button>
-	<div class="relative">
-		<Modal isOpen={isModalOpen} on:close={closeModal} />
-	</div>
+	<Modal isOpen={isModalOpen} on:close={closeModal}>
+		<Button on:click={closeModal}>close</Button>
+	</Modal>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
+	<h1 class="text-7xl font-hand">hello</h1>
 </div>

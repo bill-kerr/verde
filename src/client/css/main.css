@@ -21,4 +21,8 @@ div[data-tippy-root][data-popper-placement^='top'] .tippy-arrow {
 	@apply h-5 w-5;
 }
 
+.focusable {
+	@apply focus-visible:ring focus-visible:outline-none;
+}
+
 @tailwind utilities;

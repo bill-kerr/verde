@@ -4,26 +4,17 @@
 	export let isLoading = false;
 	export let isDisabled = false;
 	export let loadingText: string | undefined = undefined;
+	export let ref: HTMLElement | undefined = undefined;
 	let klass: string = '';
 	export { klass as class };
-
-	// const variantClasses: Record<ButtonVariant, string> = {
-	// 	blue: 'bg-blue-700 hover:bg-blue-600 active:bg-blue-600 text-white disabled:bg-blue-400',
-	// 	white: 'bg-white hover:bg-gray-100 active:bg-gray-100 text-gray-900',
-	// };
-
-	// const sizeClasses: Record<ButtonSize, string> = {
-	// 	sm: 'h-8 text-sm',
-	// 	md: 'h-10 text-base',
-	// };
 </script>
 
 <button
+	bind:this={ref}
 	on:click
 	class={clsx(
-		'relative px-6 py-2',
+		'relative px-6 py-2 focusable',
 		'font-semibold rounded-xl transition-colors duration-75 bg-transparent',
-		'focus-visible:ring focus-visible:outline-none',
 		'border-2 border-gray-300 select-none',
 		'disabled:cursor-not-allowed',
 		'hover:bg-gray-700',
