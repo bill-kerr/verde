@@ -2,7 +2,7 @@
 	import { clickOutside } from '$lib/client/actions/use-click-outside';
 	import { focusTrap } from '$lib/client/actions/use-focus-trap';
 	import IconX from '$lib/client/components/icons/icon-x.svelte';
-	import { hideScrollbar } from '$lib/client/utils/hideScrollbar';
+	import { hideScrollbar } from '$lib/client/utils/hide-scrollbar';
 	import { createEventDispatcher, onDestroy, tick } from 'svelte';
 	import { fade } from 'svelte/transition';
 
