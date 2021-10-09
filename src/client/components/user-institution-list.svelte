@@ -6,9 +6,11 @@
 	import clsx from 'clsx';
 	import { slide } from 'svelte/transition';
 	import Button from '$lib/client/components/button.svelte';
+	import Modal from '$lib/client/components/modal.svelte';
 
 	let klass = '';
 	export { klass as class };
+	let isConfirmationModalOpen = false;
 
 	const userInstitutionResult = useUserInstitutions();
 	const userAccountsResult = useUserAccounts();
@@ -20,7 +22,9 @@
 		expandedInstitutions = { ...expandedInstitutions, [id]: !isExpanded };
 	}
 
-	function handleRemoveInstitution(id: number) {}
+	function handleRemoveInstitution(id: number) {
+		isConfirmationModalOpen = true;
+	}
 </script>
 
 <div class={klass}>
@@ -73,3 +77,12 @@
 		</ul>
 	{/if}
 </div>
+
+<Modal isOpen={isConfirmationModalOpen} on:close={() => (isConfirmationModalOpen = false)}>
+	<h2 class="font-hand text-4xl text-red-300">Warning!</h2>
+	<p>Are you sure you'd like to remove this institution and all its related accounts?</p>
+	<div class="mt-6 flex items-center justify-end">
+		<Button on:click={() => (isConfirmationModalOpen = false)}>Cancel</Button>
+		<Button class="ml-2 border-red-400" on:click={() => (isConfirmationModalOpen = false)}>Yes, remove it</Button>
+	</div>
+</Modal>
