@@ -1,8 +1,8 @@
 import { prisma } from '$lib/server/clients/prisma';
-import { syncBalance } from '$lib/server/endpoints/user-institutions/balances/sync';
 import { withAuth } from '$lib/server/middleware/with-auth';
 import type { AuthedRequestHandler } from '$lib/server/types/authed-handler';
 import { errorResponse } from '$lib/server/utils/api-response';
+import { syncBalance } from '$lib/server/utils/sync/balances';
 
 const syncAccountBalances: AuthedRequestHandler = async (req) => {
 	try {

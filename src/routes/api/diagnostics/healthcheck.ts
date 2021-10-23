@@ -1,4 +1,4 @@
-import { apiSuccessResponse } from '$lib/server/utils/api-response';
+import { successResponse } from '$lib/server/utils/api-response';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const get: RequestHandler = () => apiSuccessResponse({ message: 'ok' });
+export const get: RequestHandler = () => successResponse({ message: 'ok' });

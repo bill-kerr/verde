@@ -1,42 +1,42 @@
-let trapFocusList: HTMLElement[] = [];
+import { browser } from '$app/env';
+import { Focus, focusElement, focusIn, FocusResult } from '$lib/client/utils/focus';
+import { Keys } from '$lib/client/utils/keyboard';
 
-if (typeof window !== 'undefined') {
-	const isNext = (event: KeyboardEvent) => event.keyCode === 9 && !event.shiftKey;
-	const isPrevious = (event: KeyboardEvent) => event.keyCode === 9 && event.shiftKey;
-	const trapFocusListener = (event: KeyboardEvent) => {
-		if (event.target === window) {
-			return;
-		}
+export type FocusTrapOptions = {
+	restoreFocus: boolean;
+	initialFocus?: HTMLElement;
+};
 
-		const eventTarget = (event.target as unknown) as Element;
+const defaultOptions: FocusTrapOptions = {
+	restoreFocus: true,
+};
 
-		const parentNode = trapFocusList.find((node) => node.contains(eventTarget));
-		if (!parentNode) {
-			return;
-		}
+export function focusTrap(container: HTMLElement, options: Partial<FocusTrapOptions> = {}) {
+	const { restoreFocus, initialFocus } = { ...defaultOptions, ...options };
 
-		const focusable: NodeListOf<HTMLElement> = parentNode.querySelectorAll(
-			'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]',
-		);
-		const first = focusable[0];
-		const last = focusable[focusable.length - 1];
-		if (isNext(event) && event.target === last) {
-			event.preventDefault();
-			first?.focus();
-		} else if (isPrevious(event) && event.target === first) {
-			event.preventDefault();
-			last?.focus();
+	const restoreElement = browser ? (document.activeElement as HTMLElement) : null;
+	let previousActiveElement: HTMLElement | null = null;
+
+	// TODO: make initialFocus work
+	if (focusIn(container, Focus.First) === FocusResult.Error) {
+		console.warn('There is no focusable element inside the focus trap.');
+	}
+
+	const onKeydown = (event: KeyboardEvent) => {
+		if (event.key !== Keys.Tab) return;
+		event.preventDefault();
+		if (focusIn(container, event.shiftKey ? Focus.Previous : Focus.Next) === FocusResult.Success) {
+			previousActiveElement = document.activeElement as HTMLElement;
 		}
 	};
+	window.addEventListener('keydown', onKeydown, true);
 
-	document.addEventListener('keydown', trapFocusListener);
-}
-
-export const focusTrap = (node: HTMLElement) => {
-	trapFocusList.push(node);
 	return {
 		destroy() {
-			trapFocusList = trapFocusList.filter((element) => element !== node);
+			if (restoreFocus) {
+				focusElement(restoreElement);
+			}
+			window.removeEventListener('keydown', onKeydown, true);
 		},
 	};
-};
+}

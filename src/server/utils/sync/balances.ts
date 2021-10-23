@@ -18,7 +18,7 @@ export async function syncBalance(accessToken: string, plaidAccountId: string, u
 				throw new Error('Unable to sync balance');
 			}
 
-			const convertedBalance = plaidBalance * 100;
+			const convertedBalance = Math.round(plaidBalance * 100);
 
 			return prisma.userAccount
 				.update({ where: { id: userAccountId }, data: { currentBalance: convertedBalance } })

@@ -2,7 +2,7 @@ import type { PlaidGetTransactionsResponse } from '$lib/common/types/plaid';
 import { formatDate, parseDateString } from '$lib/common/utils/date-utils';
 import { plaidAxiosClient } from '$lib/server/clients/plaid';
 import { prisma } from '$lib/server/clients/prisma';
-import { plaidPaymentChannelToPaymentChannel } from '$lib/server/utils/plaid-conversions';
+import { convertAmount, convertPaymentChannel } from '$lib/server/utils/plaid-conversions';
 import type { Transaction } from '@prisma/client';
 
 function buildOffsetArray(totalTransactions: number): number[] {
@@ -69,11 +69,11 @@ export async function syncTransactions(userId: string): Promise<void> {
 					return;
 				}
 				const payload = {
-					amount: Math.round(plaidTransaction.amount * 100),
+					amount: convertAmount(plaidTransaction.amount),
 					date: parseDateString(plaidTransaction.date),
 					isPending: plaidTransaction.pending,
 					name: plaidTransaction.name,
-					paymentChannel: plaidPaymentChannelToPaymentChannel(plaidTransaction.payment_channel),
+					paymentChannel: convertPaymentChannel(plaidTransaction.payment_channel),
 					plaidTransactionId: plaidTransaction.transaction_id,
 					userId,
 					category: plaidTransaction.category ?? [],

@@ -1,6 +1,6 @@
-import { syncTransactions } from '$lib/server/endpoints/transactions/sync';
 import { withAuth } from '$lib/server/middleware/with-auth';
 import { errorResponse, successResponse } from '$lib/server/utils/api-response';
+import { syncTransactions } from '$lib/server/utils/sync/transactions';
 
 export const get = withAuth(async (req) => {
 	try {

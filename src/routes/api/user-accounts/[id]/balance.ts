@@ -1,9 +1,9 @@
 import type { VerdeGetAccountBalanceResponse } from '$lib/common/types/verde-api';
 import { prisma } from '$lib/server/clients/prisma';
-import { syncBalance } from '$lib/server/endpoints/user-institutions/balances/sync';
 import { withAuth } from '$lib/server/middleware/with-auth';
 import type { AuthedRequestHandler } from '$lib/server/types/authed-handler';
 import { errorResponse, successResponse } from '$lib/server/utils/api-response';
+import { syncBalance } from '$lib/server/utils/sync/balances';
 
 const getAccountBalance: AuthedRequestHandler = async (req) => {
 	try {

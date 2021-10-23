@@ -5,11 +5,15 @@ import type {
 } from '$lib/common/types/plaid';
 import { plaidAxiosClient } from '$lib/server/clients/plaid';
 import { prisma } from '$lib/server/clients/prisma';
-import { syncTransactions } from '$lib/server/endpoints/transactions/sync';
-import { syncUserAccounts } from '$lib/server/endpoints/user-accounts/sync';
-import { createUserInstitutionSchema } from '$lib/server/endpoints/user-institutions/create-user-institution-schema';
 import { withAuth } from '$lib/server/middleware/with-auth';
 import { errorResponse, successResponse } from '$lib/server/utils/api-response';
+import { syncTransactions } from '$lib/server/utils/sync/transactions';
+import { syncUserAccounts } from '$lib/server/utils/sync/user-accounts';
+import * as Yup from 'yup';
+
+const createUserInstitutionSchema = Yup.object({
+	publicToken: Yup.string().required(),
+}).required();
 
 export const post = withAuth<{ publicToken: string }>(async (req) => {
 	if (!createUserInstitutionSchema.isValidSync(req.body)) {

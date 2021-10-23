@@ -13,7 +13,8 @@
 		"db:down": "docker compose down",
 		"prisma:format": "npx prisma format",
 		"prisma:generate": "npx prisma generate",
-		"prisma:migrate-dev": "npx prisma migrate dev"
+		"prisma:migrate-dev": "npx prisma migrate dev",
+		"tsc": "npx tsc --noEmit"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-vercel": "next",
