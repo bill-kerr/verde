@@ -1,5 +1,6 @@
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 div[data-tippy-root] .tippy-arrow {
 	@apply absolute h-0 w-0 border-4 left-[calc(50%-0.25rem)] rotate-45 border-transparent;
@@ -13,16 +14,16 @@ div[data-tippy-root][data-popper-placement^='top'] .tippy-arrow {
 	@apply -bottom-1 border-b-gray-900 border-r-gray-900;
 }
 
-.icon-outline {
-	@apply h-6 w-6;
-}
+@layer components {
+	.icon-outline {
+		@apply h-6 w-6;
+	}
 
-.icon-solid {
-	@apply h-5 w-5;
-}
+	.icon-solid {
+		@apply h-5 w-5;
+	}
 
-.focusable {
-	@apply focus-visible:ring focus-visible:outline-none;
+	.focusable {
+		@apply focus-visible:ring focus-visible:outline-none;
+	}
 }
-
-@tailwind utilities;

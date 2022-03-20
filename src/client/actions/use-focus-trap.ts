@@ -1,6 +1,7 @@
 import { browser } from '$app/env';
 import { Focus, focusElement, focusIn, FocusResult } from '$lib/client/utils/focus';
 import { Keys } from '$lib/client/utils/keyboard';
+import { tick } from 'svelte';
 
 export type FocusTrapOptions = {
 	restoreFocus: boolean;
@@ -17,8 +18,11 @@ export function focusTrap(container: HTMLElement, options: Partial<FocusTrapOpti
 	const restoreElement = browser ? (document.activeElement as HTMLElement) : null;
 	let previousActiveElement: HTMLElement | null = null;
 
+	console.log('action running');
 	// TODO: make initialFocus work
-	if (focusIn(container, Focus.First) === FocusResult.Error) {
+	if (initialFocus) {
+		focusElement(initialFocus);
+	} else if (focusIn(container, Focus.First) === FocusResult.Error) {
 		console.warn('There is no focusable element inside the focus trap.');
 	}
 

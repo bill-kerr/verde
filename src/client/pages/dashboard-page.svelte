@@ -5,6 +5,7 @@
 	import Button from '$lib/client/components/button.svelte';
 	import IconLibrary from '$lib/client/components/icons/icon-library.svelte';
 	import Modal from '$lib/client/components/modal.svelte';
+	import NewButton from '$lib/client/components/new-button.svelte';
 	import TransactionCard from '$lib/client/components/transaction-card.svelte';
 	import { useAccountBalance } from '$lib/client/hooks/use-account-balance';
 	import { useUserAccounts } from '$lib/client/hooks/use-user-accounts';
@@ -57,6 +58,7 @@
 	<Modal isOpen={isModalOpen} on:close={closeModal}>
 		<Button on:click={closeModal}>close</Button>
 	</Modal>
+	<NewButton class="hover:bg-blue-700">this is a button</NewButton>
 	<h1 class="text-7xl font-hand">hello</h1>
 	<h1 class="text-7xl font-hand">hello</h1>
 	<h1 class="text-7xl font-hand">hello</h1>
